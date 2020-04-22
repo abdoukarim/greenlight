@@ -81,13 +81,13 @@ class User < ApplicationRecord
     search_query = ""
     role_search_param = ""
     if role.nil?
-      search_query = "users.name LIKE :search OR email LIKE :search OR username LIKE :search" \
-                    " OR users.#{created_at_query} LIKE :search OR users.provider LIKE :search" \
-                    " OR roles.name LIKE :roles_search"
+      search_query = "users.name ILIKE :search OR email ILIKE :search OR username ILIKE :search" \
+                    " OR users.#{created_at_query} ILIKE :search OR users.provider ILIKE :search" \
+                    " OR roles.name ILIKE :roles_search"
       role_search_param = "%#{string}%"
     else
-      search_query = "(users.name LIKE :search OR email LIKE :search OR username LIKE :search" \
-                    " OR users.#{created_at_query} LIKE :search OR users.provider LIKE :search)" \
+      search_query = "(users.name ILIKE :search OR email ILIKE :search OR username ILIKE :search" \
+                    " OR users.#{created_at_query} ILIKE :search OR users.provider ILIKE :search)" \
                     " AND roles.name = :roles_search"
       role_search_param = role.name
     end
